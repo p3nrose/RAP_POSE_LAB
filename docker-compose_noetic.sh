@@ -1,7 +1,7 @@
 version: '3'
 services:
   ros:
-    image: robopaas/rap-drive-lab:latest
+    image: robopaas/rap-lab-noetic
     hostname: rosdocked
     environment:
       - ROS_HOSTNAME=rosdocked
