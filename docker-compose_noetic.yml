@@ -21,4 +21,4 @@ services:
       - DISPLAY_HEIGHT= 1080
     shm_size: 2gb
     ports:
-      - "443:8080"
+      - "80:8080"
