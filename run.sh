@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export IMAGE_NAME=robopaas/rap-drive-lab:rap20210224
+export IMAGE_NAME=robopaas/rap-lab-kinetic:rap20210323
 
 # Run the container with shared X11
 #   --device=/dev/duo1:/dev/duo1\
