@@ -1,7 +1,7 @@
 version: '3'
 services:
   ros:
-    image: robopaas/rap-drive-lab
+    image: robopaas/rap-drive-lab:rap20210224
     hostname: rosdocked
     environment:
       - ROS_HOSTNAME=rosdocked
