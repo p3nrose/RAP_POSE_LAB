@@ -8,7 +8,7 @@ When working with the VMs with GPU provided by the course, you can launch the co
 
     ./run_gpu.sh
 
-This will start one containers with the ROS Noetic environment installed for you to work. Note that you will be required to set a password that you will need to access the desktops using the browser. You can access with your browser at: https://IP_ADDRESS/vnc.html
+This will start one containers with the ROS Kinetic environment installed for you to work. Note that you will be required to set a password that you will need to access the desktops using the browser. You can access with your browser at: https://IP_ADDRESS/vnc.html
 
 Click on the Connect button and you will be asked to insert the password you have defined when you started the container.
 
@@ -19,7 +19,7 @@ When working with your own laptop, you can launch the containers using docker-co
 
     docker-compose up
 
-This will launch two containers, one with the ROS Noetic environment installed for you to work on, and one for novnc (the GUI) which you can access through your browser at: http://IP_ADDRESS/vnc.html.
+This will launch two containers, one with the ROS Kinetic environment installed for you to work on, and one for novnc (the GUI) which you can access through your browser at: http://IP_ADDRESS/vnc.html.
 
 In another terminal, you can access the ROS container with:
 
