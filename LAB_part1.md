@@ -108,7 +108,7 @@ We also provide a few hints below to guide you towards the solution of the exerc
 *   How do you define the orientation of the “grasp pose”? Notice that the planner for the arm movement will align the “tool_link” frame of the robot to the pose you give it as a goal.
 
 
-(image1.png "image_tooltip")
+![alt text](image1.png "image_tooltip")
 
 
 **Extra Hints (read only if you’re stuck):**
