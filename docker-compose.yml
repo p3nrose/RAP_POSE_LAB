@@ -10,7 +10,12 @@ services:
       - novnc
     command: roscore
     volumes:
-      - $PWD:/home/ros/catkin_ws/src/rap_pose_lab/ 
+      - $PWD:/home/ros/catkin_ws/src/rap_pose_lab/
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+      - /dev/video2:/dev/video2
+      - /dev/video3:/dev/video3 
 
   novnc:  
     image: robopaas/novnc:labs
