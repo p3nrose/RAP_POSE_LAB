@@ -1,4 +1,4 @@
-his project is based on ROS Kinetic and covers the topics of the RAP course lab: **RAP_POSE_LAB**
+This project is based on ROS Kinetic and covers the topics of the RAP course lab: **RAP_POSE_LAB**
 
 You have three options to work with the project as detailed below.
 
