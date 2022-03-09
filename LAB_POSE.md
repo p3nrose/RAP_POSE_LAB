@@ -27,7 +27,7 @@ Verify the presence of the AR tag in the world in Gazebo and RViz (activate the 
 
 You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. After **launching the** aruco_detect_indiv_no_kinect.launch file you find under the `rap_pose_lab_niryo/launch` folder, you can visualize in RViz a “marker” that shows any aruco tag detected by the camera (add the required plugin). Aruco also publishes the corresponding TF.  
 
-Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that the TF tree needs to be completely connected** in order to compute transformations to and from each frame.
+Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that **the TF tree needs to be completely connected** in order to compute transformations to and from each frame.
 
 You can now **verify what topics the ar_trackar_alvar node is publishing and identify the poses and the id for the identified aruco tag**.
 
