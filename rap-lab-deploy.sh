@@ -19,7 +19,7 @@ else
     echo
     echo "https://rap-2022-${GROUPNO}.k8s.init-lab.ch"
     echo
-    echo "Note that it may take up to 5 minutes before the system is up"
+    echo "Note that it may take up to 1 minute before the system is up"
     echo
     echo "Happy RAPping!"
     echo
