@@ -20,6 +20,10 @@ The entire session will take 90 minutes.
 
 # Task 1 - Tracking an AR tag in simulation
 
+Access the following repository and fork it https://github.zhaw.ch/RAP-EN/RAP_VIZ_LAB 
+
+Now that you have forked it, clone the forked repository under your persistent folder on the k8s cluster, i.e., catkin_ws/src/rap.
+
 In this task you will detect the position of AR tags using a simulated camera. 
 
 Build the project for this lab called `rap_pose_lab_niryo` and source your workspace before launching the following launch file `niryo_pickandplace_sim.launch` in this project (wait until Rviz is started). \
