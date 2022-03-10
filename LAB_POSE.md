@@ -22,12 +22,12 @@ The entire session will take 90 minutes.
 
 In this task you will detect the position of AR tags using a simulated camera. 
 
-Build the project for this lab called `rap_pose_lab_niryo` and source your workspace before launching the following launch file `niryo_pickandplace_sim.launch` in this project. \
+Build the project for this lab called `rap_pose_lab_niryo` and source your workspace before launching the following launch file `niryo_pickandplace_sim.launch` in this project (wait until Rviz is started). \
 Verify the presence of the AR tag in the world in Gazebo and RViz (activate the point cloud and the image plugins of the camera). 
 
 You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. After **launching the** aruco_detect_indiv_no_kinect.launch file you find under the `rap_pose_lab_niryo/launch` folder, you can visualize in RViz a “marker” that shows any aruco tag detected by the camera (add the required plugin). Aruco also publishes the corresponding TF.  
 
-Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that the** TF tree needs to be completely connected** in order to compute transformations to and from each frame.
+Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that **the TF tree needs to be completely connected** in order to compute transformations to and from each frame.
 
 You can now **verify what topics the ar_trackar_alvar node is publishing and identify the poses and the id for the identified aruco tag**.
 
@@ -50,7 +50,7 @@ The task is composed of the following steps:
 
 
 * Use ar_track_alvar to identify the marker pose (as in Task 1)
-* Use the marker pose to **compute a “grasp pose” **(msg type: PoseStamped) that will **place the gripper 7 cm above the marker** (picking from above)
+* Use the marker pose to **compute a “grasp pose”** (msg type: PoseStamped) that will **place the gripper 7 cm above the marker** (picking from above)
 * Visualize the grasp pose through rviz (a display tool called “Pose” is pre-configured in your RViz listening to topic “/grasp_pose_from_marker”)
 * Send the grasp pose to the arm movement planner, verify the plan, trigger the arm movement
 * Close the gripper
