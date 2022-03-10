@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export IMAGE_NAME=robopaas/rap-lab-pose-cpu
+export IMAGE_NAME=robopaas/rap-lab-build-cpu
 
 # Run the container with shared X11
 #   --device=/dev/duo1:/dev/duo1\

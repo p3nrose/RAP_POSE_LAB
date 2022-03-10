@@ -1,7 +1,7 @@
 version: '3'
 services:
   ros:
-    image: robopaas/rap-lab-pose-cpu
+    image: robopaas/rap-lab-build-cpu
     hostname: rosdocked
     environment:
       - ROS_HOSTNAME=rosdocked
