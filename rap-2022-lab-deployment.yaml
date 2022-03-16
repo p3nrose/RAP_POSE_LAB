@@ -22,7 +22,7 @@ spec:
       containers:
       - name: rap-2022-container
         #image: robopaas/rosdocked-noetic-k8s:latest
-        image: gitlab.cloudlab.zhaw.ch:5050/robotics-application-programming/rap-2022-content/rap-lab-build
+        image: gitlab.cloudlab.zhaw.ch:5050/robotics-application-programming/rap-2022-content/rap-lab-pose
         resources:
           limits:
             cpu: "8"
