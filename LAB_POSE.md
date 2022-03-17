@@ -45,6 +45,10 @@ Similarly, you can visualize what the “/visualizazion_marker” pose is for th
 
 In this task you will have to **grasp an object in the simulated environment** (Gazebo) and move it somewhere else before releasing it. 
 
+Launch the simulation with:
+
+ `roslaunch icclab_grasping_niryo niryo_pickandplace_sim.launch world_name:=box_with_marker.world`
+
 To do this you will have to identify the pose of the object to grasp using the kinect camera and the aruco marker placed right in front of the object. We provide you with the “grasp_marker.py”  script in the `rap_pose_lab_niryo/rap_pose_lab_niryo/scripts` folder, you should extend it to perform the needed tasks. Start by reading it to understand its organization.
 
  
