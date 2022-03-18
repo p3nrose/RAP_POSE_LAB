@@ -108,7 +108,9 @@ You will need the following commands in different windows:
 
 `roslaunch icclab_grasping_niryo static_camera_transformation_publisher.launch`
 
-`roslaunch icclab_grasping_niryo moveit_rviz_fakegripper.launch"`
+`roslaunch rap_pose_lab_niryo aruco_detect_indiv_no_kinect.launch`
+
+`roslaunch icclab_grasping_niryo moveit_rviz_fakegripper.launch`
 
 Once everything is running you can launch your python script to test it on the arm.
 
