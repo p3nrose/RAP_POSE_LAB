@@ -20,9 +20,9 @@ The entire session will take 90 minutes.
 
 # Task 1 - Tracking an AR tag in simulation
 
-Access the following repository and fork it https://github.zhaw.ch/RAP-EN/RAP_VIZ_LAB 
+Access the following repository and fork it https://github.zhaw.ch/RAP-EN/RAP_POSE_LAB.git
 
-Now that you have forked it, clone the forked repository under your persistent folder on the k8s cluster, i.e., catkin_ws/src/rap.
+Now that you have forked it, clone the forked repository under your persistent folder on the k8s cluster, i.e., catkin_ws/src/rap, build the project and source the workspace first.
 
 In this task you will detect the position of AR tags using a simulated camera. 
 
@@ -32,7 +32,7 @@ Launch the simulation with the command below and wait until Rviz is started:
  
 Verify the presence of the AR tag in the world in Gazebo and RViz (activate the point cloud and the image plugins of the camera). 
 
-You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. Launch the aruco detector with the following commmand (remember to build the project and source the workspace first):
+You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. Launch the aruco detector with the following commmand:
 
  `roslaunch rap_pose_lab_niryo aruco_detect_indiv_no_kinect.launch`
 
@@ -52,11 +52,11 @@ Similarly, you can visualize what the “/visualizazion_marker” pose is for th
 
 In this task you will have to **grasp an object in the simulated environment** (Gazebo) and move it somewhere else before releasing it. 
 
-Launch the simulation with:
+If needed, relaunch the simulation environment with:
 
  `roslaunch icclab_grasping_niryo niryo_pickandplace_sim.launch world_name:=box_with_marker.world`
 
-To do this you will have to identify the pose of the object to grasp using the kinect camera and the aruco marker placed right in front of the object. We provide you with the “grasp_marker.py”  script in the `rap_pose_lab_niryo/rap_pose_lab_niryo/scripts` folder, you should extend it to perform the needed tasks. Start by reading it to understand its organization.
+You will have to identify the pose of the object to grasp using the kinect camera and the aruco marker placed right in front of the object. We provide you with the “grasp_marker.py”  script in the `rap_pose_lab_niryo/rap_pose_lab_niryo/scripts` folder, you should extend it to perform the needed tasks. Start by reading it to understand its organization.
 
  
 
@@ -100,9 +100,7 @@ We provide you with a few hints below to guide you towards the solution of the e
 
 ## Task 3 – Test the script on the HW
 
-Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for you. 
-
-You will need the following commands in different windows:
+Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for your group. After the connection to the robot is setup you will need the following commands to be run in different windows:
 
 `roslaunch rosbridge_server rosbridge_websocket.launch`
 
