@@ -26,10 +26,17 @@ Now that you have forked it, clone the forked repository under your persistent f
 
 In this task you will detect the position of AR tags using a simulated camera. 
 
-Build the project for this lab called `rap_pose_lab_niryo` and source your workspace before launching the following launch file `niryo_pickandplace_sim.launch` in this project (wait until Rviz is started). \
+Launch the simulation with the command below and wait until Rviz is started:
+
+ `roslaunch icclab_grasping_niryo niryo_pickandplace_sim.launch world_name:=box_with_marker.world`
+ 
 Verify the presence of the AR tag in the world in Gazebo and RViz (activate the point cloud and the image plugins of the camera). 
 
-You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. After **launching the** aruco_detect_indiv_no_kinect.launch file you find under the `rap_pose_lab_niryo/launch` folder, you can visualize in RViz a “marker” that shows any aruco tag detected by the camera (add the required plugin). Aruco also publishes the corresponding TF.  
+You will use the ar_track_alvar package (see [http://wiki.ros.org/ar_track_alvar](http://wiki.ros.org/ar_track_alvar) )  to detect the AR tags in the simulated environment. Launch the aruco detector with the following commmand (remember to build the project and source the workspace first):
+
+ `roslaunch rap_pose_lab_niryo aruco_detect_indiv_no_kinect.launch`
+
+Now you can activate a “marker” in RviZ that shows any aruco tag detected by the camera (add the required plugin). Aruco also publishes the corresponding TF.  
 
 Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that **the TF tree needs to be completely connected** in order to compute transformations to and from each frame.
 
@@ -91,17 +98,21 @@ We provide you with a few hints below to guide you towards the solution of the e
 * After grasping the object move the arm in another position using moveit in the script and release the object (the solution for planning with moveit is given to you as part of the class niryo_moveit)
 
 
-### Subtask 2.2 – Preparation for Camera Pose Estimation
+## Task 3 – Test the script on the HW
 
-When visualizing the TF tree, you noticed that we have a connected tree and the position of every coordinate frame is known (connected). This is achieved by two nodes that are publishing “static” TF transforms. Use the appropriate command to find which nodes are doing this and find which launch file starts them.
+Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for you. 
 
-Either restart the simulation without the node publishing the pose of the camera or kill that node manually.
+You will need the following commands in different windows:
 
-Question: How can you use the marker detection algorithm to estimate the pose of the camera? Would it help if the pose of the marker with respect to the robot was known?
+`roslaunch rosbridge_server rosbridge_websocket.launch`
 
-Try to move the camera in gazebo and see how the pose of markers detected in Rviz moves around. Can you use the TF package nodes to update the position of the camera in space (recreating a fully connected TF tree)? How?
+`roslaunch icclab_grasping_niryo static_camera_transformation_publisher.launch`
+
+`roslaunch icclab_grasping_niryo moveit_rviz_fakegripper.launch"`
+
+Once everything is running you can launch your python script to test it on the arm.
 
 
-## Task 3 – Important: Cleanup!
+## Task 4 – Important: Cleanup!
 
 When you are done with the lab, please remove all deployments on the k8s cluster by using the `rap-lab-remove.sh` script.
