@@ -1,0 +1,4 @@
+<launch>
+<node pkg="tf" type="static_transform_publisher" name="camera_link_frame_broadcaster" args="0.5830718685135818 -0.009280289504153636 0.4126430568291639 -0.37049376916549526 -0.030872353700151678 0.927952184471557 -0.026191756738004057 ground_link camera_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="camera_color_optical_frame_to_link" args="-0.001 0.015 0.000 -0.498 0.505 -0.495 0.502 camera_link camera_color_optical_frame 100" />
+</launch>
