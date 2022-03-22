@@ -96,7 +96,7 @@ Once your code is working in simulation you can test it on real robots. To do th
 
 `roslaunch rap_pose_lab_niryo aruco_detect_indiv_no_kinect.launch`
 
-`roslaunch icclab_grasping_niryo moveit_rviz_fakegripper.launch`
+`roslaunch icclab_grasping_niryo niryo_pickandplace_sim.launch`
 
 Once everything is running you can launch your python script to test it on the arm.
 
