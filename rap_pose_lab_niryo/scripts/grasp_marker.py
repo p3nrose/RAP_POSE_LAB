@@ -18,6 +18,8 @@ from ar_track_alvar_msgs.msg import AlvarMarkers
 from moveit_python.geometry import rotate_pose_msg_by_euler_angles, translate_pose_msg
 
 MARKER_ID = "ar_marker_1"
+GRIPPER_LENGTH = 0.09
+GRIPPER_FINGER_LENGTH = 0.04
 
 class Tag_nav():
   '''Class for reacting to aruco_tags.'''
@@ -42,11 +44,11 @@ class Tag_nav():
     # ADD YOUR CODE HERE
     
     
-    rospy.loginfo("Transformed pose is: \n %s", grasp_pose)
+    rospy.loginfo("Grasp pose is: \n %s", grasp_pose)
     
     # open gripper
     self.gripper_open.publish()   
-    # grasp pose
+    # visualize grasp pose in rviz
     self.publish_grasp_pose(grasp_pose)
     # send pose goal to arm
     self.move_arm.move_to(grasp_pose) 
