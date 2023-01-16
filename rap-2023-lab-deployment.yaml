@@ -1,0 +1,243 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: wg-secret
+type: Opaque
+data:
+  # Generate and encode the server private key: `wg genkey | base64`
+  privatekey: S0RndHl3TmZzNDhUU2x0MEhoKzZENDZENE15RWhvUk9lOEdMRVQ3K2VsTT0K
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: wg-configmap
+data:
+  wg0.conf: |
+    [Interface]
+    Address = 10.33.0.1/32
+    ListenPort = 51820
+    PostUp = wg set wg0 private-key /etc/wireguard/privatekey && iptables -t nat -A POSTROUTING -s 10.33.0.0/24 -o eth0 -j MASQUERADE
+    PostDown = iptables -t nat -D POSTROUTING -s 10.33.0.0/24 -o eth0 -j MASQUERADE
+
+    [Peer]
+    PublicKey = ysK5MAxcpcxEgLezfNCXaYqh66UlZQrzl5lJygkfDw8=
+    AllowedIPs = 10.33.0.2/32
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: wireguard
+  labels:
+    app: wireguard
+spec:
+  type: NodePort
+  ports:
+  - name: wg
+    protocol: UDP
+    port: 51820    
+    nodePort: $NODE_PORT
+  selector:
+    name: rap-2023
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rap-2023-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rap-2023
+  template:
+    metadata:
+      name: rap-2023
+      labels:
+        name: rap-2023
+    spec:
+      runtimeClassName: "nvidia"
+      hostname: "rap-2023"
+      hostAliases:
+      - ip: "127.0.0.1"
+        hostnames:
+        - "rap-2023"
+      initContainers:
+      - name: random-container
+        image: robopaas/rosdocked-noetic-k8s:11.8.0-devel-ubuntu20.04
+        command: ["/usr/bin/git"] 
+        args: ["clone", "https://github.com/tharaka27/lab_initializer.git"]
+        # && cd lab_initializer && sh ./lab_pose_initialize.sh"]
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 1
+          limits:
+            memory: 1Gi
+            cpu: 1
+      containers:
+      - name: wireguard
+        image: robopaas/wireguard-go:20230106
+        command:
+        - sh
+        - -c
+        - echo "Public key '$(wg pubkey < /etc/wireguard/privatekey)'" && /entrypoint.sh
+        ports:
+        - containerPort: 51820
+          protocol: UDP
+          name: wireguard
+        env:
+        - name: LOG_LEVEL
+          value: info
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+          privileged: true
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 1
+          limits:
+            memory: 1Gi
+            cpu: 1
+        volumeMounts:
+        - name: cfgmap
+          mountPath: /etc/wireguard/wg0.conf
+          subPath: wg0.conf
+        - name: secret
+          mountPath: /etc/wireguard/privatekey
+          subPath: privatekey
+      - name: rap-2023-container       
+        image: robopaas/rosdocked-noetic-k8s:11.8.0-devel-ubuntu20.04
+        #image: gitlab.cloudlab.zhaw.ch:5050/robotics-application-programming/rap-2022-content/rap-lab-pose
+        resources:
+          limits:
+            cpu: "8"
+            memory: 16Gi
+          requests:
+            cpu: "8"
+            memory: 16Gi
+        env:
+          - name: ROS_HOSTNAME
+            value: rap-2023
+          - name: PASSWD
+            value: $PASSWD
+          - name: DISPLAY
+            value: ":0"
+        ports:
+        - containerPort: 11311
+          name: rosmaster
+        - containerPort: 8080
+          name: webgui
+        - containerPort: 9090
+          name: websocket
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+          privileged: true
+        # volumeMounts:
+        # - mountPath: "/home/ros/catkin_ws/src/rap"
+        #   name: group-volume
+      # initContainers:
+      # - name: volume-mount-hack
+      #   image: busybox
+      #   resources:
+      #     limits:
+      #       cpu: "1"
+      #       memory: 1Gi
+      #     requests:
+      #       cpu: "1"
+      #       memory: 1Gi
+      #   command: ["sh", "-c", "chown -R 1000:1000 /vol"]
+      #   volumeMounts:
+      #   - name: group-volume
+      #     mountPath: /vol
+      # nodeSelector: 
+      #   gpu-attached: "true"
+      # tolerations:
+      # - key: ${GPU_TOLERATION}
+      #   value: "true"
+      #   effect: "NoSchedule"
+      # volumes:
+      # - name: group-volume
+      #   persistentVolumeClaim:
+      #     claimName: rap-2023-pvc
+      volumes:
+        - name: cfgmap
+          configMap:
+            name: wg-configmap
+        - name: secret
+          secret:
+            secretName: wg-secret
+---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: rap-2023-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: csi-cinder-sc-retain
+#   resources:
+#     requests:
+#       storage: 8Gi
+# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rap-2023
+spec:
+  clusterIP: None
+  ports:
+    - name: rosmaster
+      port: 11311
+      protocol: TCP
+    - name: webgui
+      port: 8080
+      targetPort: 8080
+    - name: websocket
+      port: 9090
+      targetPort: 9090
+  selector:
+    name: rap-2023
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rap-2023-ingress
+  labels:
+    name: rap-2023
+spec:
+  rules:
+  - host: rap-2023-${GROUPNO}.robopaas.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rap-2023
+            port:
+              number: 8080
+---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: rap-2023-ws-ingress
+#   labels:
+#     name: rap-2023
+# spec:
+#   rules:
+#   - host: rap-2023-ws.robopaas.dev
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: rap-2023-service
+#             port:
+#               number: 9090
+# ---
+
