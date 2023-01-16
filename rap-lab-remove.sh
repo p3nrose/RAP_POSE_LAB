@@ -7,6 +7,6 @@ else
     echo "Removing RAP lab from ZHAW InIT Kubernetes Cluster..."
     echo
     GROUPNO=${1}
-    NAMESPACE="class-rap-2022-${GROUPNO}"
-    kubectl delete -n ${NAMESPACE} deploy rap-2022-${GROUPNO}-deployment
+    NAMESPACE="rap-2023-${GROUPNO}"
+    kubectl delete -n ${NAMESPACE} deploy rap-2023-deployment
 fi
