@@ -1,0 +1,3 @@
+[submodule "RAP_DEPLOYMENTS"]
+	path = RAP_DEPLOYMENTS
+	url = https://github.zhaw.ch/RAP-EN/RAP_DEPLOYMENTS.git
