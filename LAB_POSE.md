@@ -88,7 +88,15 @@ We provide you with a few hints below to guide you towards the solution of the e
 
 ## Task 3 – Test the script on the HW (optional)
 
-Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for your group. After the connection to the robot is setup you will need the following commands to be run in different windows and in the following order:
+Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for your group.
+
+First you'll need to set the appropriate value for `ROS_MASTER_URI` and `ROS_HOSTNAME` such that you can connect to the niryo-one.
+
+To do that,
+
+* Open a new shell and run `set_remote_robot.sh` script using `source set_remote_robot.sh <NIRYO_MODEL>`. 
+
+After the connection to the robot is setup you will need the following commands to be run in different windows and in the following order:
 
 `roslaunch icclab_grasping_niryo static_camera_transformation_publisher.launch` -> 3 version depending on your assigned robot
 
