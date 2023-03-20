@@ -86,11 +86,9 @@ We provide you with a few hints below to guide you towards the solution of the e
 * Use the /gripper/open and close topics to control the gripper
 * After grasping the object move the arm in another position using moveit in the script and release the object (the solution for planning with moveit is given to you as part of the class niryo_moveit)
 
-## Task 3 – Test the script on the HW
+## Task 3 – Test the script on the HW (optional)
 
 Once your code is working in simulation you can test it on real robots. To do this ask the lab assistants to support you in setting up the connection for your group. After the connection to the robot is setup you will need the following commands to be run in different windows and in the following order:
-
-`roslaunch rosbridge_server rosbridge_websocket.launch`
 
 `roslaunch icclab_grasping_niryo static_camera_transformation_publisher.launch` -> 3 version depending on your assigned robot
 
