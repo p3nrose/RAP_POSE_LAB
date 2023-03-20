@@ -40,7 +40,7 @@ Now you can view “markers” in RviZ that show any aruco tag detected by the c
 
 Use the command `rosrun rqt_tf_tree rqt_tf_tree` to **visualize the TF tree**. Note that **the TF tree needs to be completely connected** in order to compute transformations to and from each frame.
 
-You can now **verify what topics the ar_trackar_alvar node is publishing and identify the poses and the id for the identified aruco tag**.
+You can now **verify what topics the ar_track_alvar node is publishing and identify the poses and the id for the identified aruco tag**.
 
 Similarly, you can visualize what the “/visualizazion_marker” pose is for the detected marker. **Notice the frame_id** of the two published topics as we will use this information for the following task. 
 
