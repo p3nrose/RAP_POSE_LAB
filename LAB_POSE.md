@@ -24,7 +24,7 @@ In this task you will detect the position of AR tags using a simulated camera.
 
 Access the following repository and fork it https://github.zhaw.ch/RAP-EN/RAP_POSE_LAB.git
 
-Now that you have forked it, clone the forked repository under your persistent folder on the k8s cluster, i.e., catkin_ws/src/rap, build the project (the name is: rap_pose_lab_niryo) and source the workspace with devel/setup.bash.
+Now that you have forked it, clone the forked repository under your persistent folder on the k8s cluster, i.e., ~/rap, soft link it into ~/catkin_ws/src,  build the project (the name is: rap_pose_lab_niryo) and source the workspace with devel/setup.bash.
 
 Launch the simulation with the command below and wait until Rviz is started:
 
