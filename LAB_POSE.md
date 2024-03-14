@@ -1,5 +1,6 @@
 # Lab Transformations				
 
+**Note:** this lab is based on ROS Noetic. Please start the appropriate container in the cluster.
 
 # Introduction and Prerequisites
 
@@ -60,7 +61,7 @@ The task is composed of the following steps:
 
 * Use ar_track_alvar to identify the marker pose (as in Task 1)
 * Use the marker pose to **compute a “grasp pose”** (msg type: PoseStamped) that will **place the gripper 7 cm above the marker** (picking from above)
-* Visualize the grasp pose through rviz (a display tool called “Pose” is pre-configured in your RViz listening to topic “/grasp_pose”)
+* Publish the grasp pose and view it in RViz (a display tool called “Pose” is pre-configured in your RViz listening to topic “/grasp_pose”)
 * Send the grasp pose to the arm movement planner, verify the plan, trigger the arm movement
 * Close the gripper
 * Move arm to another given pose, verify the plan, trigger the arm movement
