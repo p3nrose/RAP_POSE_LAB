@@ -36,16 +36,23 @@ class Tag_nav():
     self.grasp_pose_pub = rospy.Publisher("/grasp_pose", PoseStamped, queue_size=1)
 
     
-  def callback_marker(self, data): # data is a PoseStamped object    
+  def callback_marker(self, data: AlvarMarkers): # data is a PoseStamped object    
 
     # log and publish
     rospy.loginfo("Marker msg was: \n %s", data)
     
     # ADD YOUR CODE HERE
-    
-    
+
+    grasp_pose = PoseStamped()
+    grasp_pose.header.frame_id = "ar_marker_1"
+    grasp_pose.pose.position.y = 0.07
+    pose = rotate_pose_msg_by_euler_angles(grasp_pose.pose, math.pi / 2, 0, - math.pi / 2)
+    grasp_pose.pose = pose
+    #grasp_pose.pose.orientation.z = 0.71
+
+        
     rospy.loginfo("Grasp pose is: \n %s", grasp_pose)
-    
+  
     # open gripper
     self.gripper_open.publish()   
     # visualize grasp pose in rviz
@@ -56,7 +63,7 @@ class Tag_nav():
     self.gripper_close.publish()
     
     # ADD YOUR CODE HERE to MOVE arm somewhere else and drop object
-
+    
   def publish_grasp_pose(self, grasp_pose):
     self.grasp_pose_pub.publish(grasp_pose)
 
